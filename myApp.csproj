@@ -1,8 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Compile" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+
+  <Target Name="Compile" DependsOnTargets="Resources" Returns="$(TargetPath)">
+      <Csc Sources="@(CSFile)"
+            TargetType="library"
+            Resources="@(CompiledResources)"
+            EmitDebugInformation="$(includeDebugInformation)"
+            References="@(Reference)"
+            DebugType="$(debuggingType)" >
+          <Output TaskParameter="OutputAssembly"
+                    ItemName="FinalAssemblyName" />
+      </Csc>
+  </Target>
 
 </Project>
