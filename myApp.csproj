@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <Target Name="Compile" DependsOnTargets="Resources" Returns="$(TargetPath)">
+  <Target Name="Compile" Returns="$(TargetPath)">
       <Csc Sources="@(CSFile)"
             TargetType="library"
             Resources="@(CompiledResources)"
